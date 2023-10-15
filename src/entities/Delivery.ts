@@ -15,7 +15,7 @@ export class Delivery {
   name: string;
 
   @Column()
-  deliveryDate: string;
+  deliveryDate: Date;
 
   @Column('decimal')
   initialLatitude: number;

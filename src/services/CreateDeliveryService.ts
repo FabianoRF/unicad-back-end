@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 
 // import IOrdersRepository from '../repositories/IOrdersRepository';
 import { Delivery } from '../entities/Delivery';
+import IDeliveryRepository from '../repositories/models/IDeliveryRepository';
 
 interface IRequest {
   name: string;
@@ -14,11 +15,22 @@ interface IRequest {
 
 @injectable()
 class CreateDeliveryService {
-  constructor() {} // private ordersRepository: IOrdersRepository, // @inject('OrdersRepository')
+  constructor(
+    @inject('DeliveryRepository')
+    private deliveryRepository: IDeliveryRepository,
+  ) {}
 
   public async execute(input: IRequest): Promise<Delivery | undefined> {
-    console.log('input ', input);
-    return input as unknown as Delivery;
+    // o que faz sentido verificar?
+    // data de entrega maior que hoje?
+
+    const delivery = this.deliveryRepository.create(input);
+    console.log(
+      'CreateDeliveryService :: delivery :: ',
+      JSON.stringify(delivery),
+    );
+
+    return delivery;
   }
 }
 

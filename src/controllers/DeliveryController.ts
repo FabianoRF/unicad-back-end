@@ -15,6 +15,15 @@ export default class DeliveryController {
 
     const createDelivery = container.resolve(CreateDeliveryService);
 
-    return response.json(createDelivery);
+    const result = await createDelivery.execute({
+      name,
+      deliveryDate,
+      initialLatitude,
+      initialLongitude,
+      finalLatitude,
+      finalLongitude,
+    });
+
+    return response.json(result);
   }
 }
