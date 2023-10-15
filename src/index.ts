@@ -1,15 +1,11 @@
-import express, { Router, Request, Response } from 'express';
+import express from 'express';
+import { AppDataSource } from './database';
+import router from './routes';
 
 const app = express();
-
-const route = Router();
+AppDataSource.initialize();
 
 app.use(express.json());
-
-route.get('/', (req: Request, res: Response) => {
-  res.json({ message: 'hello world' });
-});
-
-app.use(route);
+app.use(router);
 
 app.listen(4000, () => 'server running on port 4000');

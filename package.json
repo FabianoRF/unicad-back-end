@@ -9,7 +9,10 @@
     "lint": "eslint --ext .js,.ts"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "tsyringe": "^4.8.0",
+    "typeorm": "^0.3.17"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.1.0",
