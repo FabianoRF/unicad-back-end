@@ -32,6 +32,14 @@ class DeliveryRepository implements IDeliveryRepository {
   public async delete(id: number): Promise<void> {
     await this.ormRepository.delete(id);
   }
+
+  public async findById(id: number): Promise<Delivery | null> {
+    return this.ormRepository.findOne({
+      where: {
+        id,
+      },
+    });
+  }
 }
 
 export default DeliveryRepository;
