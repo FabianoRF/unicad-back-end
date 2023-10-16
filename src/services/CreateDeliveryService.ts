@@ -3,6 +3,7 @@ import { inject, injectable } from 'tsyringe';
 // import IOrdersRepository from '../repositories/IOrdersRepository';
 import { Delivery } from '../entities/Delivery';
 import IDeliveryRepository from '../repositories/models/IDeliveryRepository';
+import AppError from '../helpers/AppError';
 
 interface IRequest {
   name: string;
@@ -21,8 +22,9 @@ class CreateDeliveryService {
   ) {}
 
   public async execute(input: IRequest): Promise<Delivery | undefined> {
-    // o que faz sentido verificar?
-    // data de entrega maior que hoje?
+    if (new Date(input.deliveryDate).getTime() > Date.now()) {
+      throw new AppError('Delivery Date must be greater than now');
+    }
 
     const delivery = this.deliveryRepository.create(input);
     console.log(
