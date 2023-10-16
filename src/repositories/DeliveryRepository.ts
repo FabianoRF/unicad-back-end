@@ -2,6 +2,7 @@ import IDeliveryRepository from './models/IDeliveryRepository';
 import { Delivery } from '../entities/Delivery';
 import ICreateDeliveryDTO from '../dtos/ICreateDeliveryDTO';
 import { AppDataSource } from '../database';
+import IListDeliveryDTO from '../dtos/IListDeliveryDTO';
 
 class DeliveryRepository implements IDeliveryRepository {
   private ormRepository = AppDataSource.getRepository(Delivery);
@@ -14,6 +15,22 @@ class DeliveryRepository implements IDeliveryRepository {
     await this.ormRepository.save(delivery);
 
     return delivery;
+  }
+
+  public async list(
+    input: IListDeliveryDTO,
+  ): Promise<{ list: Delivery[]; count: number }> {
+    const [list, count] = await this.ormRepository
+      .createQueryBuilder()
+      .offset(input.offset)
+      .limit(input.limit)
+      .getManyAndCount();
+
+    return { list, count };
+  }
+
+  public async delete(id: number): Promise<void> {
+    await this.ormRepository.delete(id);
   }
 }
 

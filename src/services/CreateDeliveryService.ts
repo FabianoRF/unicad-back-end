@@ -1,6 +1,5 @@
 import { inject, injectable } from 'tsyringe';
 
-// import IOrdersRepository from '../repositories/IOrdersRepository';
 import { Delivery } from '../entities/Delivery';
 import IDeliveryRepository from '../repositories/models/IDeliveryRepository';
 import AppError from '../helpers/AppError';
