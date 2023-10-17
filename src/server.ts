@@ -11,8 +11,6 @@ AppDataSource.initialize();
 
 app.use(cors());
 app.use(express.json());
-app.use(router);
-
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   if (err instanceof AppError) {
     return response.status(err.statusCode).json({
@@ -28,5 +26,6 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
     message: 'Internal server error',
   });
 });
+app.use(router);
 
 app.listen(4000, () => 'Server running on port 4000');

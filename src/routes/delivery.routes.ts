@@ -7,7 +7,7 @@ const deliveryController = new DeliveryController();
 
 deliveryRouter.post('/', deliveryController.create);
 deliveryRouter.get('/', deliveryController.index);
-deliveryRouter.get('/:id', deliveryController.create);
+deliveryRouter.get('/:id', deliveryController.show);
 deliveryRouter.delete('/:id', deliveryController.delete);
 
 export default deliveryRouter;

@@ -3,9 +3,11 @@ import { container } from 'tsyringe';
 import CreateDeliveryService from '../services/CreateDeliveryService';
 import ListDeliveryService from '../services/ListDeliveryService';
 import DeleteDeliveryService from '../services/DeleteDeliveryService';
+import GetDeliveryByIdService from '../services/GetDeliveryByIdService';
 
 export default class DeliveryController {
   public async create(request: Request, response: Response) {
+    console.log('request ', request.body);
     const {
       name,
       deliveryDate,
@@ -40,6 +42,16 @@ export default class DeliveryController {
     });
 
     return response.json(list);
+  }
+
+  public async show(request: Request, response: Response) {
+    const { id } = request.params;
+
+    const createDelivery = container.resolve(GetDeliveryByIdService);
+
+    const delivery = await createDelivery.execute(+id);
+
+    return response.json(delivery);
   }
 
   public async delete(request: Request, response: Response) {

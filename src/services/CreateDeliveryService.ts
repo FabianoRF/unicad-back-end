@@ -21,7 +21,7 @@ class CreateDeliveryService {
   ) {}
 
   public async execute(input: IRequest): Promise<Delivery | undefined> {
-    if (new Date(input.deliveryDate).getTime() > Date.now()) {
+    if (new Date(input.deliveryDate).getTime() < Date.now()) {
       throw new AppError('Delivery Date must be greater than now');
     }
 

@@ -16,7 +16,7 @@ describe('ListDeliveryService', () => {
   });
 
   it('should be able to list deliveries', async () => {
-    const entitieOne = await fakeDeliveryRepository.create({
+    const entityOne = await fakeDeliveryRepository.create({
       name: 'Jonh Doe',
       deliveryDate: new Date(),
       finalLatitude: 1.22,
@@ -25,7 +25,7 @@ describe('ListDeliveryService', () => {
       initialLongitude: 1.9,
     });
 
-    const entitieTwo = await fakeDeliveryRepository.create({
+    const entityTwo = await fakeDeliveryRepository.create({
       name: 'Jonh Doe 2',
       deliveryDate: new Date(),
       finalLatitude: 1.22,
@@ -36,7 +36,7 @@ describe('ListDeliveryService', () => {
 
     const response = await listDeliveryService.execute(inputMock);
 
-    expect(response.list).toEqual([entitieOne, entitieTwo]);
+    expect(response.list).toEqual([entityOne, entityTwo]);
     expect(response.count).toEqual(2);
   });
 });
