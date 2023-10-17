@@ -7,6 +7,7 @@ import './container';
 import { errorHandler } from './middlewares/errors';
 
 const app = express();
+const port = process.env.PORT || 4000;
 AppDataSource.initialize();
 
 app.use(cors());
@@ -14,4 +15,4 @@ app.use(express.json());
 app.use(router);
 app.use(errorHandler);
 
-app.listen(4000, () => 'Server running on port 4000');
+app.listen(port, () => 'Server running on port 4000');
